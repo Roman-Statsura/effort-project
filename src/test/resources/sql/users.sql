@@ -21,8 +21,8 @@ INSERT INTO
     company,
     role
   ) VALUES (
-    'roman@yandex.ru',
-    '$2a$10$yZor4QozB12x2BoofGmZy.6yOLKpVg4uw2WMpitNSHqCEzsKL/icW',
+    'srs@yandex.ru',
+    '$2a$10$OP8t8F306pjaLbrwXQEBHujRQ01vgBHQBdQ3Z.4aNl9QEYRLZGkdi',
     'Roman',
     'Statsura',
     'Unknown',
@@ -38,8 +38,8 @@ INSERT INTO
     company,
     role
   ) VALUES (
-    'kalyam@yandex.com',
-    '$2a$10$8a8R24PzhZOInGYR.35EM.j3b4wBi8/os.Si2SUd.CrREBF4wR7sG',
+    'kalyam@yandex.ru',
+    '$2a$10$4c3Sak/49QKXcdCrRYOMhOdWVgdpj9Tr5iy2xiymPS8dHfU/kJGc6',
     'Kalyam',
     'Jopin',
     'Yandex',

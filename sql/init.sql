@@ -1,6 +1,6 @@
 CREATE DATABASE effort;
 
-\c board;
+\c effort;
 
 CREATE TABLE users(
   email text NOT NULL,
