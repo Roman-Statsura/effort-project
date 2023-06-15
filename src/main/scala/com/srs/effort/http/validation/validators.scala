@@ -7,6 +7,7 @@ import cats.implicits.*
 import java.net.URL
 import scala.util.{Try, Success, Failure}
 
+import com.srs.effort.domain.job.*
 import com.srs.effort.domain.auth.*
 import com.srs.effort.domain.user.*
 
@@ -43,6 +44,48 @@ object validators {
   def validateEmail(field: String, fieldName: String): ValidationResult[String] =
     if (emailRegex.findFirstMatchIn(field).isDefined) field.validNel
     else InvalidEmail(fieldName).invalidNel
+
+  given jobInfoValidator: Validator[JobInfo] = (jobInfo: JobInfo) => {
+    val JobInfo(
+      company,     // should not be empty
+      title,       // should not be empty
+      description, // should not be empty
+      externalUrl, // should be a valid URL
+      remote,
+      location, // should not be empty
+      salaryLo,
+      salaryHi,
+      currency,
+      country,
+      tags,
+      image,
+      seniority,
+      other
+    ) = jobInfo
+
+    val validCompany     = validateRequired(company, "company")(_.nonEmpty)
+    val validTitle       = validateRequired(title, "title")(_.nonEmpty)
+    val validDescription = validateRequired(description, "description")(_.nonEmpty)
+    val validExternalUrl = validateUrl(externalUrl, "externalUrl")
+    val validLocation    = validateRequired(location, "location")(_.nonEmpty)
+
+    (
+      validCompany,
+      validTitle,
+      validDescription,
+      validExternalUrl,
+      remote.validNel,
+      validLocation,
+      salaryLo.validNel,
+      salaryHi.validNel,
+      currency.validNel,
+      country.validNel,
+      tags.validNel,
+      image.validNel,
+      seniority.validNel,
+      other.validNel
+    ).mapN(JobInfo.apply) // ValidatedNel[ValidationFailure, JobInfo]
+  }
 
   given loginInfoValidator: Validator[LoginInfo] = (loginInfo: LoginInfo) => {
     val validUserEmail = validateRequired(loginInfo.email, "email")(_.nonEmpty)
